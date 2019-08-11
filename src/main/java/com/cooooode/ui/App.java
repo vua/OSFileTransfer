@@ -36,6 +36,7 @@ public class App extends Application {
         Label label_user= new Label("User");
         Label label_port=new Label("Port");
         Label label_password= new Label("Password");
+        Label label_path= new Label("Path");
         label_host.setStyle(
                 "-fx-pref-width: 60;" +
                 "-fx-text-fill: #fff");
@@ -48,17 +49,23 @@ public class App extends Application {
         label_password.setStyle(
                 "-fx-pref-width: 60;" +
                 "-fx-text-fill: #fff");
+        label_path.setStyle(
+                "-fx-pref-width: 60;" +
+                        "-fx-text-fill: #fff");
         TextField textField_host=new TextField();
         TextField textField_user=new TextField();
         TextField textField_port=new TextField();
         TextField textField_password=new TextField();
+        TextField textField_path=new TextField();
         textField_host.setStyle("-fx-pref-width: 200;");
         textField_user.setStyle("-fx-pref-width: 200;");
         textField_port.setStyle("-fx-pref-width: 200;");
+        textField_path.setStyle("-fx-pref-width: 200;");
         textField_password.setStyle("-fx-pref-width: 200;");
         textField_host.setText(properties.getProperty("host"));
         textField_user.setText(properties.getProperty("user"));
         textField_port.setText(properties.getProperty("port"));
+        textField_path.setText(properties.getProperty("path"));
         textField_password.setText(properties.getProperty("password"));
         HBox hBox_host=new HBox();
         hBox_host.getChildren().addAll(label_host,textField_host);
@@ -68,7 +75,9 @@ public class App extends Application {
         hBox_port.getChildren().addAll(label_port,textField_port);
         HBox hBox_password=new HBox();
         hBox_password.getChildren().addAll(label_password,textField_password);
-        top_vbox.getChildren().addAll(hBox_host,hBox_user,hBox_port,hBox_password);
+        HBox hBox_path=new HBox();
+        hBox_path.getChildren().addAll(label_path,textField_path);
+        top_vbox.getChildren().addAll(hBox_host,hBox_user,hBox_port,hBox_password,hBox_path);
 
         for (Node node:
              top_vbox.getChildren()) {
@@ -152,6 +161,7 @@ public class App extends Application {
             String user=textField_user.getText();
             String port=textField_port.getText();
             String password=textField_password.getText();
+            String dir_path=textField_path.getText();
             StringBuilder log= new StringBuilder();
             if(host.equals("")||user.equals("")||password.equals("")) {
 
@@ -172,7 +182,7 @@ public class App extends Application {
                                                 " -P " + port +
                                                 " "+path+
                                                 " " + url +
-                                                ":/root/"
+                                                ":"+dir_path
 
                                 );
                                 BufferedReader bufferedReader = new BufferedReader(
